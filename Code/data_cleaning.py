@@ -42,7 +42,9 @@ us_states = ["AL", "KY", "OH", "AK", "LA", "OK", "AZ", "ME", "OR", "AR", "MD", "
              "ND", "WI", "KS", "MP", "WY"] 
 
 us_business = business[business['state'].isin(us_states)]
+
 us_business = us_business[us_business.is_open == 0]
+
 state_counts = us_business.groupby('state').count()
 state_counts['business_id'].sort_values(ascending = False).head(10)
 us_business.shape
@@ -76,6 +78,34 @@ df.drop_duplicates(subset=['business_id','user_id','text'],inplace=True)
 df2 = pd.merge(df, tips,  how='left', left_on=['business_id','user_id'], right_on = ['business_id','user_id'])
 df2.drop_duplicates(subset=['business_id','user_id','text_x','text_y'],inplace=True)
 
-
-
 df2.to_csv("data_cleaned.csv")
+
+
+#open
+us_open= ['FL','PA']
+us_business1 = business[business['state'].isin(us_open)]
+us_business1 = us_business1[us_business1.is_open == 1]
+
+df_bars1 = us_business1[us_business1.categories.str.contains('Bars',case=False,na=False)]
+df_nightlife1 = us_business1[us_business1.categories.str.contains('NightLife',case=False,na=False)]
+df_both1= pd.concat([df_bars1,df_nightlife1])
+df_both1.drop_duplicates(inplace=True,subset="business_id")
+
+chunk_list = []
+for chunk in reviews:
+    # Merge reviews.json and fastfood business file based on business_id
+    chunk_merged = pd.merge(df_both1, chunk, on='business_id', how='inner')
+    # Show feedback on progress
+    print(f"{chunk_merged.shape[0]} in {size:,} related reviews")
+    chunk_list.append(chunk_merged)
+
+dfo = pd.concat(chunk_list, ignore_index=True, join='outer', axis=0)
+dfo.drop_duplicates(subset=['business_id','user_id','text'],inplace=True)
+
+
+df2o = pd.merge(dfo, tips,  how='left', left_on=['business_id','user_id'], right_on = ['business_id','user_id'])
+df2o.drop_duplicates(subset=['business_id','user_id','text_x','text_y'],inplace=True)
+counts = df2o['business_id'].value_counts()
+df2o = df2o[~df2o['business_id'].isin(counts[counts < 700].index)]
+
+df2o.to_csv("data_cleaned_open.csv")
