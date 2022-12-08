@@ -27,26 +27,26 @@ modelDF$is_open <- 1 - modelDF$is_open
 
 modelDF$drink <- modelDF %>%
   pull(drink) %>%
-  cut(breaks=c(-Inf,-.1,.05,.15,.4,Inf),
+  cut(breaks=c(-Inf,-.3,-.1,.05,.3,Inf),
       labels=c("1","2","3","4","5"))
 modelDF$food <- modelDF %>%
   pull(food) %>%
-  cut(breaks=c(-Inf,-.1,.05,.15,.4,Inf),
+  cut(breaks=c(-Inf,-.3,-.1,.05,.3,Inf),
       labels=c("1","2","3","4","5"))
 
 modelDF$ambience <- modelDF %>%
   pull(ambience) %>%
-  cut(breaks=c(-Inf,-.1,.05,.15,.4,Inf),
+  cut(breaks=c(-Inf,-.3,-.1,.05,.3,Inf),
       labels=c("1","2","3","4","5"))
 
 modelDF$service <- modelDF %>%
   pull(service) %>%
-  cut(breaks=c(-Inf,-.1,.05,.15,.4,Inf),
+  cut(breaks=c(-Inf,-.3,-.1,.05,.3,Inf),
       labels=c("1","2","3","4","5"))
 
 modelDF$price <- modelDF %>%
   pull(price) %>%
-  cut(breaks=c(-Inf,-.1,.05,.15,.4,Inf),
+  cut(breaks=c(-Inf,-.3,-.1,.05,.3,Inf),
       labels=c("1","2","3","4","5"))
 write.csv(modelDF, "data_model_closed.csv", row.names=FALSE)
 

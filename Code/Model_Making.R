@@ -19,10 +19,10 @@ dfFull <- dfFull[dfFull$time >0,]
 
 # vet <- mutate(dfFull, SEN = ifelse((sentiment_score < 0), "LT3", "OV3"),
 #               SEN = factor(SEN))
-# dfFull$is_open <- 1 - dfFull$is_open
+#dfFull$is_open <- 1 - dfFull$is_open
 dfFull$food <- dfFull$food
 # full.cox <- coxph(Surv(time, is_open) ~ SEN + food + drink + ambience + price + service, data = vet)
-full.cox <- coxph(Surv(time, is_open) ~ food + drink + ambience + price + strata(service), data = dfFull)
+full.cox <- coxph(Surv(time, is_open) ~ drink + ambience + price + strata(service), data = dfFull)
 summary(full.cox)
 
 
@@ -51,7 +51,7 @@ ggcoxzph(full.ph)
 
 
 #Influential Observations
-ggcoxdiagnostics(full.cox, type = "dfbeta",linear.predictions = FALSE, ggtheme = theme_bw())[1]
+ggcoxdiagnostics(full.cox, type = "dfbeta",linear.predictions = FALSE, ggtheme = theme_bw())
 
 #Linear relationship of log(predictors)
 
