@@ -4,8 +4,8 @@ Diagnostics for the Cox model.R is for model diagnostics, it can be run with ful
 Model_Making.R includes both our model and model diagnostics, it can be run with data_model_closed.csv and data_model_open.csv as data.
 Text Classification testing.ipynb is for sentiment analysis, it can be run in Jupyter with data_cleaned_PA.csv as data.
 Time Column creation.R is for time column creation.
-data_cleaning.py is to extract data from .json.
-text_classification_sediment_open.py is for sentiment analysis.
+data_cleaning.py is to extract data from .json and the initial preprocessing of dataset including selection of scope.
+text_classification_sentiment_ open and closed is for word embeddings, unsupervised text classification and sentiment analysis for creating aspect features in model.
 
 Data Folder:
 data_model_closed.csv is data after the first data cleaning. 
