@@ -1,4 +1,6 @@
 # Stats-628-Module-3-Group-15-Project
+Authors : Maxwell Schleck, Shravan Kaul, Jiayang Wang
+
 Code Folder:
 Diagnostics for the Cox model.R is for model diagnostics, it can be run with full_model_cat.csv as data.
 Model_Making.R includes both our model and model diagnostics, it can be run with data_model_closed.csv and data_model_open.csv as data.
