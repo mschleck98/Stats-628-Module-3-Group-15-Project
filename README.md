@@ -1,4 +1,5 @@
 # Stats-628-Module-3-Group-15-Project
+# Preventing Bar Closure
 Authors : Maxwell Schleck, Shravan Kaul, Jiayang Wang
 
 Code Folder:
